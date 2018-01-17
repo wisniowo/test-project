@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<style>
+		form > div {
+			margin-bottom: 10px;
+		}
+		
+		div > label {
+			display:block;
+		}
+		
+		.fieldError {
+			border-color:red;
+			color:red;
+		}
+	</style>
+</head>
+<body>
+	<div th:replace="macros::header"></div>
+
+	<form action="#" th:action="@{/vehicle/save}" th:object="${vehicle}" method="post">
+
+		<input type="hidden" th:field="*{id}"/>
+		<div>
+			<label th:text="#{vehicle.brand}">test</label>
+			<select th:field="*{brand.id}" th:disabled="${readonly}" th:errorClass="fieldError">
+				<option th:each="brand : ${brands}" th:text="${brand.name}" th:value="${brand.id}" th:selected="${brand.id == vehicle.brand.id}"/>
+			</select>
+		</div>
+		<div>
+			<label th:text="#{vehicle.engineType}">test</label>
+			<span th:each="engineType : ${engineTypes}">
+				<input type="radio" th:field="*{engineType}" th:value="${engineType}" th:disabled="${readonly}" th:errorClass="fieldError"/>
+				<label th:for="${#ids.prev('engineType')}" th:text="${engineType}" th:class="${#fields.hasErrors('engineType') ? 'fieldError' : ''}"></label>
+			</span>
+		</div>
+		<div>
+			<label th:text="#{vehicle.displacement}">test</label>
+			<input type="text" th:field="*{displacement}" th:disabled="${readonly}" th:errorClass="fieldError"/>
+		</div>
+		<div>
+			<label th:text="#{vehicle.firstRegistrationDate}">test</label>
+			<input type="text" th:field="*{firstRegistrationDate}" th:disabled="${readonly}" th:errorClass="fieldError" placeholder="yyyy-MM-dd"/>
+		</div>
+		<div>
+			<label th:text="#{vehicle.numberOfDoors}">test</label>
+			<input type="text" th:field="*{numberOfDoors}" th:disabled="${readonly}" th:errorClass="fieldError"/>
+		</div>
+		<div>
+			<label th:text="#{vehicle.color}">test</label>
+			<input type="text" th:field="*{color}" th:disabled="${readonly}" th:errorClass="fieldError"/>
+		</div>
+		<div>
+			<label th:text="#{vehicle.weight}">test</label>
+			<input type="text" th:field="*{weight}" th:disabled="${readonly}" th:errorClass="fieldError"/>
+		</div>
+		<div>
+			<label th:text="#{vehicle.chassisNumber}">test</label>
+			<input type="text" th:field="*{chassisNumber}" th:disabled="${readonly}" th:errorClass="fieldError"/>
+		</div>
+		<div>
+			<label th:text="#{vehicle.description}">test</label>
+			<textarea th:field="*{description}" th:disabled="${readonly}" rows="10" cols="40" th:errorClass="fieldError"></textarea>
+		</div>
+
+		<input type="submit" value="Save Changes" th:disabled="${readonly}"/>
+		<a href="vehicles.html" th:href="@{/vehicles}">[Back to Vehicles]</a>
+		<span th:replace="macros::actions(${vehicle})"></span>
+	
+	</form>
+
+</body>
+</html>

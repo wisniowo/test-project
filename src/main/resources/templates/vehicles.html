@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<style>
+		th, td {
+			padding-left:10px;
+		}
+		div.userMessage {
+			background:1px solid green;
+			padding:10px;
+			color:green;
+		}
+	</style>
+</head>
+<body>
+	<div th:replace="macros::header"></div>
+	<a href="vehicle.html" th:href="@{/vehicle/add}">[Add]</a>		
+	<table>
+		<tr>
+			<th>id</th>
+			<th th:text="#{vehicle.brand}">[]</th>
+			<th th:text="#{vehicle.engineType}">[]</th>
+			<th th:text="#{vehicle.displacement}">[]</th>
+			<th th:text="#{vehicle.firstRegistrationDate}">[]</th>
+			<th th:text="#{vehicle.numberOfDoors}">[]</th>
+			<th th:text="#{vehicle.color}">[]</th>
+			<th th:text="#{vehicle.weight}">[]</th>
+			<th th:text="#{vehicle.chassisNumber}">[]</th>
+			<th>[Actions]</th>
+		</tr>
+		<tr th:each="vehicle : ${vehicles}" th:object="${vehicle}">
+			
+			<td th:text="*{id}"></td>
+			<td th:text="*{brand.name}"></td>
+			<td th:text="*{engineType}"></td>
+			<td th:text="*{displacement}"></td>
+			<td th:text="*{{firstRegistrationDate}}"></td>
+			<td th:text="*{numberOfDoors}"></td>
+			<td th:text="*{color}"></td>
+			<td th:text="*{weight}"></td>
+			<td th:text="*{chassisNumber}"></td>
+			<td>
+				<div th:replace="macros::actions(${vehicle})"></div>
+			</td>
+			
+		</tr>
+	</table>
+	
+</body>
+</html>

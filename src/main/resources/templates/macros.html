@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<div th:fragment="header">
+		<div class="loggedInUser" th:if="${loggedInUser != null}" style="padding-bottom: 10px">
+			Logged in as :
+			<span th:text="${loggedInUser}">[Logged in user]</span>
+			<form action="#" th:action="@{/logout}" method="post">
+				<input type="submit" value="Logout"/>
+			</form> 
+		</div>
+		<div class="userMessage" th:text="${userMessage}">[User message]</div>
+	</div>
+	
+	<span th:fragment="actions(vehicle)" th:object="${vehicle}" th:if="${vehicle.id}">
+		<a href="vehicle.html" th:href="@{/vehicle/view/{id}(id=*{id})}">[View]</a>
+		<a href="vehicle.html" th:href="@{/vehicle/edit/{id}(id=*{id})}">[Edit]</a>
+		<a href="vehicles.html" th:href="@{/vehicle/delete/{id}(id=*{id})}" onclick="return confirm('really delete ?')">[Delete]</a>
+	</span>
+
+</html>
