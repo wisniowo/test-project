@@ -69,10 +69,7 @@ public class VehicleController {
 
 	@RequestMapping("/vehicle/save")
 	public String vehicleSave(@Valid Vehicle vehicle, Errors errors, BindingResult bindingResult, Model model, Locale locale) {
-		System.out.println("----");
-		System.out.println(errors.getErrorCount());
 		if (errors.hasErrors()) {
-			System.out.println(errors.getFieldErrors());
 			model.addAttribute("readonly", false);
 			return "vehicle";
 		} else {
@@ -81,38 +78,6 @@ public class VehicleController {
 		}
 		return "redirect:/vehicles";
 	}
-
-	/*
-	 * @RequestMapping("/user/{id}") public String user(@PathVariable Long id, Model
-	 * model) { model.addAttribute("user", helloService.findById(id)); return
-	 * "user"; }
-	 * 
-	 * @RequestMapping("/users-save") public String usersSave(@Valid UsersForm
-	 * usersForm, Errors errors, BindingResult bindingResult) {
-	 * System.out.println("----"); usersForm.getUsers().stream().forEach(user ->
-	 * System.out.println(user.getEmail()));
-	 * 
-	 * System.out.println(errors.getErrorCount()); if (errors.hasErrors()) {
-	 * System.out.println(errors.getFieldErrors()); return "users"; } else {
-	 * helloService.updateUsers(usersForm.getUsers()); } return "redirect:/users"; }
-	 * 
-	 * @RequestMapping("/users/remove/{id}") public String usersSave(@PathVariable
-	 * Long id) { helloService.removeUser(id); return "redirect:/users"; }
-	 * 
-	 * @RequestMapping("/users/cart-add/{id}") public String
-	 * addToShoppingCart(@PathVariable Long id) {
-	 * helloService.addUserToShoppingCart(id); return "redirect:/users"; }
-	 * 
-	 * @RequestMapping("/users/cart-remove/{id}") public String
-	 * removeFromShoppingCart(@PathVariable Long id) {
-	 * helloService.removeUserFromShoppingCart(id); return "redirect:/users"; }
-	 * 
-	 * @ModelAttribute("allRoles") public List<Role> allRoles() { return
-	 * Arrays.asList(Role.values()); }
-	 * 
-	 * @ModelAttribute("shoppingCart") public ShoppingCart shoppingCart() { return
-	 * shoppingCart; }
-	 */
 
 	@ModelAttribute("brands")
 	public List<Brand> getBrands() {
